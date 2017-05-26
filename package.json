@@ -4,7 +4,7 @@
   "description": "An ES6 semaphore for executing promises in a limited fashion.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
