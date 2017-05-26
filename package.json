@@ -1,0 +1,24 @@
+{
+  "name": "es6-promise-semaphore",
+  "version": "0.0.1",
+  "description": "An ES6 semaphore for executing promises in a limited fashion.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlaustill/es6-promise-semaphore.git"
+  },
+  "keywords": [
+    "es6",
+    "promise",
+    "semaphore"
+  ],
+  "author": "Joshua Austill",
+  "license": "GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999",
+  "bugs": {
+    "url": "https://github.com/jlaustill/es6-promise-semaphore/issues"
+  },
+  "homepage": "https://github.com/jlaustill/es6-promise-semaphore#readme"
+}
