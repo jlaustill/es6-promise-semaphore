@@ -16,10 +16,11 @@ class PromiseSemaphore {
         this.executing = 0;
         this.results = [];
         this.errors = [];
+        this.count = 0;
     }
 
     executeNext() {
-        if (errored(this)) {
+        if (errored(this) && this.executing <= 0) {
             this.reject(this.errors);
         } else if (notExecutingMax(this) && workRemaining(this)) {
             let n = this.promises.shift();
@@ -27,12 +28,14 @@ class PromiseSemaphore {
             n()
                 .then(result => {
                     this.executing--;
-                    console.log("result? -> " + result + ": executing -> " + this.executing);
+                    console.log("result? -> " + this.count++ + ": executing -> " + this.executing);
                     this.results.push(result);
                     this.executeNext();
                 })
                 .catch(error => {
+                    this.executing--;
                     this.errors.push(error);
+                    this.executeNext();
                 });
         } else if (this.promises.length === 0 && this.executing <= 0) {
             this.resolve(this.results);
