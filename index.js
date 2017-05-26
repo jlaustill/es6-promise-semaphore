@@ -1,21 +1,23 @@
-function notExecutingMax(ps) {
+"use strict";
+
+function notExecutingMax (ps) {
     return ps.executing <= ps.limit;
 }
 
-function workRemaining(ps) {
+function workRemaining (ps) {
     return ps.promises.length > 0;
 }
 
-function errored(ps) {
+function errored (ps) {
     return ps.errors.length > 0;
 }
 
-function workIsDone(ps) {
-    return ps.promises.length === 0 && ps.executing <= 0
+function workIsDone (ps) {
+    return ps.promises.length === 0 && ps.executing <= 0;
 }
 
 class PromiseSemaphore {
-    constructor(limit) {
+    constructor (limit) {
         this.limit = limit;
         this.executing = 0;
         this.results = [];
@@ -23,7 +25,7 @@ class PromiseSemaphore {
         this.count = 0;
     }
 
-    executeNext() {
+    executeNext () {
         if (errored(this) && this.executing <= 0) {
             this.reject(this.errors);
         } else if (notExecutingMax(this) && workRemaining(this) && !errored(this)) {
@@ -46,7 +48,7 @@ class PromiseSemaphore {
         }
     }
 
-    execute(work) {
+    execute (work) {
         return new Promise((resolve, reject) => {
             this.resolve = resolve;
             this.reject = reject;

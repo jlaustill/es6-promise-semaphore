@@ -1,0 +1,127 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "accessor-pairs": 2,
+    "array-bracket-spacing": [
+      2,
+      "never",
+      {}
+    ],
+    "block-scoped-var": 2,
+    "brace-style": [
+      2,
+      "1tbs",
+      {}
+    ],
+    "callback-return": 2,
+    "camelcase": [
+      2,
+      {
+        "properties": "always"
+      }
+    ],
+    "comma-dangle": [
+      2,
+      "never"
+    ],
+    "comma-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "consistent-return": 2,
+    "curly": [
+      2,
+      "all"
+    ],
+    "dot-location": [
+      2,
+      "property"
+    ],
+    "dot-notation": 2,
+    "eqeqeq": 2,
+    "guard-for-in": 2,
+    "handle-callback-err": 2,
+    "indent": [
+      2,
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "no-alert": 2,
+    "no-caller": 2,
+    "no-cond-assign": [
+      2,
+      "except-parens"
+    ],
+    "no-constant-condition": 2,
+    "no-control-regex": 2,
+    "no-div-regex": 2,
+    "no-dupe-args": 2,
+    "no-dupe-keys": 2,
+    "no-duplicate-case": 2,
+    "no-empty": 2,
+    "no-empty-character-class": 2,
+    "no-ex-assign": 2,
+    "no-extra-boolean-cast": 2,
+    "no-extra-semi": 2,
+    "no-func-assign": 2,
+    "no-inner-declarations": [
+      2,
+      "functions"
+    ],
+    "no-invalid-regexp": 2,
+    "no-irregular-whitespace": 2,
+    "no-loop-func": 2,
+    "no-mixed-spaces-and-tabs": 2,
+    "no-negated-in-lhs": 2,
+    "no-obj-calls": 2,
+    "no-redeclare": 2,
+    "no-regex-spaces": 2,
+    "no-shadow": 0,
+    "no-sparse-arrays": 2,
+    "no-trailing-spaces": [
+      2,
+      {
+        "skipBlankLines": false
+      }
+    ],
+    "no-undef": 2,
+    "no-unreachable": 2,
+    "no-unused-vars": 2,
+    "no-use-before-define": 2,
+    "quotes": [
+      2,
+      "double"
+    ],
+    "radix": 2,
+    "semi": [
+      2,
+      "always"
+    ],
+    "space-before-function-paren": [
+      2,
+      "always"
+    ],
+    "strict": [
+      2,
+      "global"
+    ],
+    "use-isnan": 2,
+    "valid-typeof": 2,
+    "vars-on-top": 0,
+    "wrap-iife": [
+      2,
+      "any"
+    ]
+  },
+  "env": {
+    "node": true,
+    "es6": true
+  }
+}
