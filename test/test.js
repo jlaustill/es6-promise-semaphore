@@ -21,7 +21,7 @@ describe("es6-promise-semaphore", function () {
     describe("run", function () {
         it("should return 100 results with 100 inputs", function () {
             this.timeout(0);
-            promiseSemaphore = new PromiseSemaphore(10, true);
+            promiseSemaphore = new PromiseSemaphore(10);
 
             let promises = [];
 
@@ -105,7 +105,7 @@ describe("es6-promise-semaphore", function () {
         it("should reject object limit", function () {
             this.timeout(0);
 
-            promiseSemaphore = new PromiseSemaphore({limit: 1}, true);
+            promiseSemaphore = new PromiseSemaphore({limit: 1});
 
             let promises = [];
 
