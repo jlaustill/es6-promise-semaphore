@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/jlaustill/es6-promise-semaphore.svg?branch=master)](https://travis-ci.org/jlaustill/es6-promise-semaphore)
+[![Coverage Status](https://coveralls.io/repos/github/jlaustill/es6-promise-semaphore/badge.svg?branch=master)](https://coveralls.io/github/jlaustill/es6-promise-semaphore?branch=master)
 
 # es6-promise-semaphore
 1. [Introduction](#1-introduction)
