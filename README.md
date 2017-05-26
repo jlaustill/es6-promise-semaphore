@@ -1,5 +1,6 @@
 # es6-promise-semaphore
 1. [Introduction](#1-introduction)
+2. [Quick Start](#2-quick-start)
 
 
 # 1. Introduction
