@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jlaustill/es6-promise-semaphore.svg?branch=master)](https://travis-ci.org/jlaustill/es6-promise-semaphore)
+
 # es6-promise-semaphore
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
