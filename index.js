@@ -10,6 +10,10 @@ function errored(ps) {
     return ps.errors.length > 0;
 }
 
+function workIsDone(ps) {
+    return ps.promises.length === 0 && ps.executing <= 0
+}
+
 class PromiseSemaphore {
     constructor(limit) {
         this.limit = limit;
@@ -22,7 +26,7 @@ class PromiseSemaphore {
     executeNext() {
         if (errored(this) && this.executing <= 0) {
             this.reject(this.errors);
-        } else if (notExecutingMax(this) && workRemaining(this)) {
+        } else if (notExecutingMax(this) && workRemaining(this) && !errored(this)) {
             let n = this.promises.shift();
             this.executing++;
             n()
@@ -37,7 +41,7 @@ class PromiseSemaphore {
                     this.errors.push(error);
                     this.executeNext();
                 });
-        } else if (this.promises.length === 0 && this.executing <= 0) {
+        } else if (workIsDone(this)) {
             this.resolve(this.results);
         }
     }
@@ -47,8 +51,13 @@ class PromiseSemaphore {
             this.resolve = resolve;
             this.reject = reject;
             this.promises = work;
-            while (notExecutingMax(this)) {
-                this.executeNext();
+
+            if (! Number.isInteger(this.limit)) {
+                reject("contructor only excepts integers.");
+            } else {
+                while (notExecutingMax(this)) {
+                    this.executeNext();
+                }
             }
         });
     }
