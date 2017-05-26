@@ -21,7 +21,7 @@ describe("es6-promise-semaphore", function () {
     describe("run", function () {
         it("should return 100 results with 100 inputs", function () {
             this.timeout(0);
-            promiseSemaphore = new PromiseSemaphore(10);
+            promiseSemaphore = new PromiseSemaphore(10, true);
 
             let promises = [];
 
@@ -39,7 +39,7 @@ describe("es6-promise-semaphore", function () {
         }); // it
         it("should reject after error", function () {
             this.timeout(0);
-            promiseSemaphore = new PromiseSemaphore(10);
+            promiseSemaphore = new PromiseSemaphore(10, true);
 
             let promises = [];
 
@@ -64,7 +64,7 @@ describe("es6-promise-semaphore", function () {
         it("should reject text limit", function () {
             this.timeout(0);
 
-            promiseSemaphore = new PromiseSemaphore("error");
+            promiseSemaphore = new PromiseSemaphore("error", true);
 
             let promises = [];
 
@@ -84,7 +84,7 @@ describe("es6-promise-semaphore", function () {
         it("should reject float limit", function () {
             this.timeout(0);
 
-            promiseSemaphore = new PromiseSemaphore(1.1);
+            promiseSemaphore = new PromiseSemaphore(1.1, true);
 
             let promises = [];
 
@@ -105,7 +105,7 @@ describe("es6-promise-semaphore", function () {
         it("should reject object limit", function () {
             this.timeout(0);
 
-            promiseSemaphore = new PromiseSemaphore({limit: 1});
+            promiseSemaphore = new PromiseSemaphore({limit: 1}, true);
 
             let promises = [];
 

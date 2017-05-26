@@ -16,13 +16,20 @@ function workIsDone (ps) {
     return ps.promises.length === 0 && ps.executing <= 0;
 }
 
+function debugOut (ps, text) {
+    if (ps.debug === true) {
+        console.log(text);
+    }
+}
+
 class PromiseSemaphore {
-    constructor (limit) {
+    constructor (limit, debug) {
         this.limit = limit;
         this.executing = 0;
         this.results = [];
         this.errors = [];
         this.count = 0;
+        this.debug = debug === true;
     }
 
     executeNext () {
@@ -34,7 +41,7 @@ class PromiseSemaphore {
             n()
                 .then(result => {
                     this.executing--;
-                    console.log("result? -> " + this.count++ + ": executing -> " + this.executing);
+                    debugOut(this, "result " + this.count++ + ": Currently executing -> " + this.executing + " promises.");
                     this.results.push(result);
                     this.executeNext();
                 })
