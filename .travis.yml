@@ -2,5 +2,5 @@ language: node_js
 node_js:
   - "6"
 before_install:
-  - sudo i -g eslint
+  - sudo npm i -g eslint
 script: eslint index.js
