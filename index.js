@@ -1,7 +1,7 @@
 "use strict";
 
 function notExecutingMax (ps) {
-    return ps.executing <= ps.limit;
+    return ps.executing <= ps.limit && ps.promises.length > 0;
 }
 
 function workRemaining (ps) {

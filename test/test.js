@@ -58,6 +58,24 @@ describe("es6-promise-semaphore", function () {
                     assert.notEqual(null, error);
                 }); // promiseSemaphore.execute
         }); // it
+        it("should gracefully handle a higher limit than input", function () {
+            this.timeout(0);
+            promiseSemaphore = new PromiseSemaphore(10000);
+
+            let promises = [];
+
+            for (i = 0; i < 100; i++) {
+                let c = i;
+                promises.push(() => { return factory(c);});
+            }
+
+            return promiseSemaphore.execute(promises)
+                .then((results) => {
+                    assert.equal(100, results.length);
+                }).catch((error) => {
+                    throw new Error("this shouldn't fail");
+                }); // promiseSemaphore.execute
+        }); // it
     }); // describe
 
     describe("non-numeric input", function () {
