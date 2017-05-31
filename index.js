@@ -36,9 +36,9 @@ class PromiseSemaphore {
         if (errored(this) && this.executing <= 0) {
             this.reject(this.errors);
         } else if (notExecutingMax(this) && workRemaining(this) && !errored(this)) {
-            let n = this.promises.shift();
+            let nextPromise = this.promises.shift()();
             this.executing++;
-            n()
+            Promise.resolve(nextPromise)
                 .then(result => {
                     this.executing--;
                     debugOut(this, "result " + this.count++ + ": Currently executing -> " + this.executing + " promises.");

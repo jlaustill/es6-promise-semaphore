@@ -58,6 +58,30 @@ describe("es6-promise-semaphore", function () {
                     assert.notEqual(null, error);
                 }); // promiseSemaphore.execute
         }); // it
+
+        it("should resolve any input, not just promises", function () {
+            this.timeout(0);
+            promiseSemaphore = new PromiseSemaphore(10);
+
+            let promises = [];
+
+            for (i = 0; i < 100; i++) {
+                let c = i;
+                if (2 % c === 0) {
+                    promises.push(() => {return c;});
+                } else {
+                    promises.push(() => { return factory(c);});
+                }
+            }
+
+            return promiseSemaphore.execute(promises)
+                .then((results) => {
+                    assert.equal(100, results.length);
+                }).catch((error) => {
+                    throw new Error("this shouldn't fail");
+                }); // promiseSemaphore.execute
+        }); // it
+
         it("should gracefully handle a higher limit than input", function () {
             this.timeout(0);
             promiseSemaphore = new PromiseSemaphore(10000);
