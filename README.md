@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/jlaustill/es6-promise-semaphore.svg?branch=master)](https://travis-ci.org/jlaustill/es6-promise-semaphore)
 [![Coverage Status](https://coveralls.io/repos/github/jlaustill/es6-promise-semaphore/badge.svg?branch=master)](https://coveralls.io/github/jlaustill/es6-promise-semaphore?branch=master)
 [![npm version](https://badge.fury.io/js/es6-promise-semaphore.svg)](https://badge.fury.io/js/es6-promise-semaphore)
+<span class="badge-npmdownloads"><a href="https://www.npmjs.com/package/es6-promise-semaphore" title="View this project on NPM"><img src="https://img.shields.io/npm/dm/es6-promise-semaphore.svg" alt="NPM downloads" /></a></span>
 
 # es6-promise-semaphore
 1. [Introduction](#1-introduction)
