@@ -6,6 +6,8 @@
 # es6-promise-semaphore
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
+3. [Deeper Dive](#3-deeper-dive)
+4. [Contributing](#4-contributing)
 
 
 # 1. Introduction
@@ -88,3 +90,31 @@ You need to wrap your promise call in a function so it doesn't execute.
 promises.push(() => { return factory(c);});
 ```
 And you need to replace Promise.all with promiseSemaphore.execute.  That's it!
+
+# 3. Deeper Dive
+
+If you aren't already familiar with what a semaphore is and the above example doesn't give you everything you need to get started then I'll try to explain in a bit more detail here.  First off, a semaphore is a way to execute processes in a limited fashion.  In other words, 2 at a time, or 5 at a time.  In the example above, 10 at a time.  
+
+When you create the promiseSemaphore, you pass in the number of processes/promises that you want executed at a time as an integer.  Like this:
+
+```javascript
+const PromiseSemaphore = require("es6-promise-semaphore"),
+      promiseSemaphore = new PromiseSemaphore(5); // <- the number is how many to execute at once.
+```
+
+PromiseSemaphore also excepts a second parameter to turn on debug mode.  This will display a message after each promise finishes with console.log.  I don't recommend using it in production, but it may come in handy for debugging your code.
+
+```javascript
+const PromiseSemaphore = require("es6-promise-semaphore"),
+      promiseSemaphore = new PromiseSemaphore(5, true);
+```
+
+Passing anything but true will be ignored.
+
+Once you have this created, you use it just like Promise.All.  I went out of my way to keep this as simple to use as possible.  You simply pass in an array of promises and it will execute them X at a time.  If this doesn't make sense open an issue and I will do my best to address your question further.
+
+# 4. Contributing
+
+I welcome any and all contributions!  Be it code, tests, or documentation.  Simply fork this repo and do a pull request with your contribution.  The only warning I have is that I won't accept code that isn't tested and passing the build.
+
+Have a great day!
