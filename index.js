@@ -31,7 +31,9 @@ function ensureWork (work, ps) {
     } else if (work.length > 0) {
         return work;
     } else {
-        return [() => {return work;}];
+        return [() => {
+            return work;
+        }];
     }
     return work;
 }
