@@ -22,6 +22,20 @@ function debugOut (ps, text) {
     }
 }
 
+function ensureWork (work, ps) {
+    // If it's an empty array, resolve empty array
+    // If it's an array just return it
+    // If it's not an array, return an array with it as the contents
+    if (work.length === 0) {
+        ps.resolve(work);
+    } else if (work.length > 0) {
+        return work;
+    } else {
+        return [() => {return work;}];
+    }
+    return work;
+}
+
 class PromiseSemaphore {
     constructor (limit, debug) {
         this.limit = limit;
@@ -59,7 +73,7 @@ class PromiseSemaphore {
         return new Promise((resolve, reject) => {
             this.resolve = resolve;
             this.reject = reject;
-            this.promises = work;
+            this.promises = ensureWork(work, this);
 
             if (! Number.isInteger(this.limit)) {
                 reject("contructor only excepts integers.");
