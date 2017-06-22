@@ -1,91 +1,93 @@
 "use strict";
+const PromiseSemaphore = function (_limit, _debug) {
+    const $$ = {},
+        debug = _debug === true,
+        limit = _limit;
+    let executing = 0,
+        promises = [],
+        results = [],
+        errors = [],
+        count = 0,
+        resolve = null,
+        reject = null;
 
-function notExecutingMax (ps) {
-    return ps.executing <= ps.limit && ps.promises.length > 0;
-}
+    let notExecutingMax = () => {
+        return executing <= limit && promises.length > 0;
+    };
 
-function workRemaining (ps) {
-    return ps.promises.length > 0;
-}
+    let workRemaining = () => {
+        return promises.length > 0;
+    };
 
-function errored (ps) {
-    return ps.errors.length > 0;
-}
+    let erred = () => {
+        return errors.length > 0;
+    };
 
-function workIsDone (ps) {
-    return ps.promises.length === 0 && ps.executing <= 0;
-}
+    let workIsDone = () => {
+        return promises.length === 0 && executing <= 0;
+    };
 
-function debugOut (ps, text) {
-    if (ps.debug === true) {
-        console.log(text);
-    }
-}
-
-function ensureWork (work, ps) {
-    // If it's an empty array, resolve empty array
-    // If it's an array just return it
-    // If it's not an array, return an array with it as the contents
-    if (work.length === 0) {
-        ps.resolve(work);
-    } else if (work.length > 0) {
-        return work;
-    } else {
-        return [() => {
-            return work;
-        }];
-    }
-    return work;
-}
-
-class PromiseSemaphore {
-    constructor (limit, debug) {
-        this.limit = limit;
-        this.executing = 0;
-        this.results = [];
-        this.errors = [];
-        this.count = 0;
-        this.debug = debug === true;
-    }
-
-    executeNext () {
-        if (errored(this) && this.executing <= 0) {
-            this.reject(this.errors);
-        } else if (notExecutingMax(this) && workRemaining(this) && !errored(this)) {
-            let nextPromise = this.promises.shift()();
-            this.executing++;
-            Promise.resolve(nextPromise)
-                .then(result => {
-                    this.executing--;
-                    debugOut(this, "result " + this.count++ + ": Currently executing -> " + this.executing + " promises.");
-                    this.results.push(result);
-                    this.executeNext();
-                })
-                .catch(error => {
-                    this.executing--;
-                    this.errors.push(error);
-                    this.executeNext();
-                });
-        } else if (workIsDone(this)) {
-            this.resolve(this.results);
+    let debugOut = (_text) => {
+        if (debug === true) {
+            console.log(_text);
         }
-    }
+    };
 
-    execute (work) {
-        return new Promise((resolve, reject) => {
-            this.resolve = resolve;
-            this.reject = reject;
-            this.promises = ensureWork(work, this);
+    let ensureWork = (_work) => {
+        // If it's an empty array, resolve empty array
+        // If it's an array just return it
+        // If it's not an array, return an array with it as the contents
+        if (_work.length === 0) {
+            return resolve(_work);
+        } else if (_work.length > 0) {
+            return _work;
+        } else {
+            return [() => {
+                return _work;
+            }];
+        }
+    };
 
-            if (! Number.isInteger(this.limit)) {
-                reject("contructor only excepts integers.");
+    let executeNext = () => {
+        if (erred() && executing <= 0) {
+            reject(errors);
+        } else if (notExecutingMax() && workRemaining() && !erred()) {
+            let nextPromise = promises.shift()();
+            executing++;
+            Promise.resolve(nextPromise)
+                .then(_result => {
+                    executing--;
+                    debugOut("result " + count++ + ": Currently executing -> " + executing + " promises.");
+                    results.push(_result);
+                    executeNext();
+                })
+                .catch(_error => {
+                    executing--;
+                    errors.push(_error);
+                    executeNext();
+                });
+        } else if (workIsDone()) {
+            resolve(results);
+        }
+    };
+
+    $$.execute = (_work) => {
+        return new Promise((_resolve, _reject) => {
+            resolve = _resolve;
+            reject = _reject;
+            promises = ensureWork(_work);
+
+            if (! Number.isInteger(limit)) {
+                reject("Constructor only excepts integers.");
             } else {
-                while (notExecutingMax(this)) {
-                    this.executeNext();
+                while (notExecutingMax()) {
+                    executeNext();
                 }
             }
         });
-    }
-}
+    };
+
+    return $$;
+};
 
 module.exports = PromiseSemaphore;
