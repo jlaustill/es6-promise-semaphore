@@ -1,6 +1,6 @@
 {
   "name": "es6-promise-semaphore",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An ES6 semaphore for executing promises in a limited fashion.",
   "main": "index.js",
   "scripts": {
