@@ -18,7 +18,7 @@
     "semaphore"
   ],
   "author": "Joshua Austill",
-  "license": "GNU LESSER GENERAL PUBLIC LICENSE Version 2.1, February 1999",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jlaustill/es6-promise-semaphore/issues"
   },
