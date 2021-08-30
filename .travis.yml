@@ -1,10 +1,11 @@
+--- 
+after_success: 
+  - "npm run coveralls"
+before_script: 
+  - "npm install -g eslint"
 language: node_js
-node_js:
+node_js: 
   - "6"
-before_script:
-  - npm install -g eslint
-script:
-  - eslint index.js
-  - npm test
-after_success:
-- npm run coveralls
+script: 
+  - "eslint index.js"
+  - "npm test"
